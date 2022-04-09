@@ -64,10 +64,10 @@ In questa sezione verranno aggiunti  nuovi componenti della struttura man mano c
 
 - [View](#View)
 - [Text](#Text)
-- [Image](##Image)
-- [Button](##Button)
-- [Touchables](##Touchables)
-- [Alert](##Alert)
+- [Image](#Image)
+- [Button](#Button)
+- [Touchables](#Touchables)
+- [Alert](#Alert)
 - Per altri componenti, fare riferimento a [questo link](https://reactnative.dev/docs/accessibilityinfo).
 
 ## View
@@ -127,6 +127,56 @@ Possiamo quindi sostituire `View` con `SafeAreaView` nel nostro codice:
 Quello che **SafeAreaView** fa, è semplicemente aggiungere la giusta quantità di **padding top** per essere sicura che il testo sia visibile.
 
 ## Text
+
+Per aggiungere del testo all'interno della nostra applicazione, dobbiamo sempre farlo tramite il componente `<Text> </Text>` .
+
+### Props
+
+Possiamo aggiungere dei cosiddetti `props` ai nostri componenti, che specificano un comportamento; ad esempio, se avessimo un testo molto lungo, e volessimo limitare le linee utilizzate per mostrare questo testo, ci basterebbe usare il prop `numberOfLines`:
+
+```react
+<SafeAreaView style={styles.container}>
+      <Text numberOfLines={1}>Open up App.js to start working on your app!</Text>
+      <StatusBar style="auto" />
+    </SafeAreaView>
+```
+
+In questo modo questo modo, alla fine della prima linea verranno visualizzati dei puntini sospensivi (...) per indicare che il testo continua, ma non è visualizzato interamente.
+
+### Eventi
+
+Possiamo anche impostare un'azione che viene eseguita a seguito di un **evento:**
+
+```react
+<SafeAreaView style={styles.container}>
+      <Text numberOfLines={1} onPress={() => console.log("Click rilevato")}>Open up App.js to start working on your app!</Text>
+      <StatusBar style="auto" />
+    </SafeAreaView>
+```
+
+Possiamo usare `onPress={}` per eseguire un'azione quando un componente viene cliccato; possiamo eseguire l'azione in due modi:
+
+#### Inline
+
+Scriviamo una **funzione lambda** (inline) che esegue un'azione; questo metodo è utile nel momento in cui l'azione da eseguire è poco complessa, come un alert o un log in console.
+
+#### funzione separata
+
+```react
+export default function App() {
+  const handlePress = () => console.log("click rilevato");
+    
+  return (
+    <SafeAreaView style={styles.container}>
+      <Text numberOfLines={1} onPress={handlePress} >
+          Open up App.js to start working on your app!</Text>
+      <StatusBar style="auto" />
+    </SafeAreaView>
+  );
+}
+```
+
+
 
 ## Image
 
