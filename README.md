@@ -62,8 +62,8 @@ In questa sezione verranno aggiunti  nuovi componenti della struttura man mano c
 
 # Concetti Fondamentali
 
-- [View](## View)
-- [Text](## Text)
+- [View](#View)
+- [Text](#Text)
 - [Image](##Image)
 - [Button](##Button)
 - [Touchables](##Touchables)
