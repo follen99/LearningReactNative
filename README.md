@@ -134,7 +134,7 @@ Per aggiungere del testo all'interno della nostra applicazione, dobbiamo sempre 
 
 Possiamo aggiungere dei cosiddetti `props` ai nostri componenti, che specificano un comportamento; ad esempio, se avessimo un testo molto lungo, e volessimo limitare le linee utilizzate per mostrare questo testo, ci basterebbe usare il prop `numberOfLines`:
 
-```react
+```javascript
 <SafeAreaView style={styles.container}>
       <Text numberOfLines={1}>Open up App.js to start working on your app!</Text>
       <StatusBar style="auto" />
@@ -147,7 +147,7 @@ In questo modo questo modo, alla fine della prima linea verranno visualizzati de
 
 Possiamo anche impostare un'azione che viene eseguita a seguito di un **evento:**
 
-```react
+```javascript
 <SafeAreaView style={styles.container}>
       <Text numberOfLines={1} onPress={() => console.log("Click rilevato")}>Open up App.js to start working on your app!</Text>
       <StatusBar style="auto" />
@@ -162,7 +162,7 @@ Scriviamo una **funzione lambda** (inline) che esegue un'azione; questo metodo Ã
 
 #### funzione separata
 
-```react
+```javascript
 export default function App() {
   const handlePress = () => console.log("click rilevato");
     
