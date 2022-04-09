@@ -21,6 +21,8 @@ apt-get install -y nodejs
 ```
 
 > Per usare React-Native è meglio utilizzare la versione 14.x di NodeJS perchè le ultime versioni danno problemi. Quindi se hai installato una versione > 14.x di NodeJS effettua un downgrade alla versione 14.x.
+>
+> [Downgrade NodeJS](https://stackoverflow.com/questions/47008159/how-to-downgrade-node-version)
 
 ### Creare un progetto
 
@@ -58,7 +60,81 @@ Possiamo suddividere i componenti in diverse categorie:
 
 In questa sezione verranno aggiunti  nuovi componenti della struttura man mano che essi verranno studiati; per il momento, fare riferimento a [questa](https://learn.habilelabs.io/best-folder-structure-for-react-native-project-a46405bdba7) pagina.
 
+# Concetti Fondamentali
 
+- [View](##View)
+- [Text](##Text)
+- [Image](##Image)
+- [Button](##Button)
+- [Touchables](##Touchables)
+- [Alert](##Alert)
+- Per altri componenti, fare riferimento a [questo link](https://reactnative.dev/docs/accessibilityinfo).
+
+## View
+
+In React-Native non sono presenti i classici tag come \<div>  di HTML, ma abbiamo lo stesso dei componenti  "contenitori", che possiamo usare per **raggruppare o nominare** dei figli:
+
+```react
+<View style={styles.container}>
+    <Text>Open up App.js to start working on your app!</Text>
+    <StatusBar style="auto" />
+</View>
+```
+
+### Cosa sono gli styles?
+
+```javascript
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
+```
+
+- `flex: 1` Indica che questa view è **flessibile** e può crescre orizzontalmente o verticalmente per riempire degli spazi vuoti. Questo permette alla view di riempire tutto lo schermo.
+- `backgroundColor: '#fff'` indica che lo sfondo sarà di colore **bianco**; per cambiare il colore ci basta cambiare il valore compreso negli apici singoli. 
+  Possiamo usare anche dei **nomi** per indicare i colori: `dodgerblue` indica un colore preciso.
+- `alignItems: 'center'`  e `justifyContent: 'center'` questi due elementi ci permettono di posizionare la nostra view al centro dello schermo. 
+  Senza questi due elementi il nostro testo andrebbe a posizionarsi nell'angolo in alto a sinistra.
+
+### Safe area
+
+Nei nuovi dispositivi potremmo avere il problema di dover posizionare i nostri elementi all'interno di una **safe area**, ovvero un'area nella quale siamo sicuri di poter posizionare elementi. Questo perchè il dispositivo potrebbe essere dotato di una **notch**, che impedirebbe la corretta visualizzazione della view.
+
+Per correggere questo comportamento, ci basta aggiungere `SafeAreaView` nelle importazioni:
+
+```javascript
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+```
+
+Possiamo quindi sostituire `View` con `SafeAreaView` nel nostro codice:
+
+```react
+<SafeAreaView style={styles.container}>
+    <Text>Open up App.js to start working on your app!</Text>
+    <StatusBar style="auto" />
+</SafeAreaView>
+```
+
+> Per sostituire più testo allo stesso momento in Visual Studio Code, ci basta selezionare il testo da sostituire, e premere ctrl+d o cmd+d per sostituire più testo contemporaneamente.
+>
+> Per uscire dalla modalità _multi cursor editing_ ci basterà premere `esc` . 
+
+Quello che **SafeAreaView** fa, è semplicemente aggiungere la giusta quantità di **padding top** per essere sicura che il testo sia visibile.
+
+## Text
+
+## Image
+
+## Button
+
+## Touchables
+
+## Alert
 
 
 
