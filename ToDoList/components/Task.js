@@ -1,7 +1,7 @@
 import react from "react";
 import {View, Text, StyleSheet} from 'react-native';
 import { Button, Touchable, TouchableHighlight, TouchableOpacity } from "react-native";
-import { TouchableWithoutFeedback } from "react-native-web";
+import { KeyboardAvoidingView, TouchableWithoutFeedback } from "react-native";
 
 /**
  * 
@@ -14,11 +14,6 @@ const Task = (props) => {
         
             <View style = {styles.item} onPress={() => console.log("click rilevato!")}>
                 <View style = {styles.itemLeft}>
-                    {/*<TouchableOpacity style = {styles.square}></TouchableOpacity>
-                    
-                    <Button title="" style={styles.square} onPress={() => console.log("click rilevato!")}></Button>
-
-                    <Text style = {styles.itemText}>{props.text}</Text>*/}
 
                     <TouchableOpacity style={styles.square}></TouchableOpacity>
 
@@ -27,6 +22,8 @@ const Task = (props) => {
 
                 <View style = {styles.circular}></View>
             </View>
+
+            
     
     )
 }
@@ -45,6 +42,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         marginBottom: 20,
+
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.23,
+        shadowRadius: 2.62,
+
+        elevation: 4,
     },
     itemLeft: {
         flexDirection: 'row',

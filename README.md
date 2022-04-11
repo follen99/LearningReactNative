@@ -264,3 +264,22 @@ In questo modo, possiamo "inviare" del testo al nostro task dal file App.js:
 Quello che otteniamo è qualcosa del genere:
 
 ![](https://i.ibb.co/f9wQ2nT/Screenshot-20220411-125029.png)
+
+## Stili utili
+
+- `justifyContent: 'space-between'`: separa due elementi e li posiziona ai lati estremi dello schermo.
+- `flexDirection: 'row'`: dispone gli elementi sulla stessa riga (e non in due righe diverse in un'unica colonna).
+- `alignItems: 'center'`: allinea più elementi al centro dello schermo.
+
+## Creare uno stato
+
+```javascript
+import {useState} from 'react';
+
+const [task, setTask] = useState();
+```
+
+- **task**: nome dello stato, lo usiamo per effettuare il track dello stato (in questo caso dell'immissione del reminder)
+- **setTask**: la funzione che useremo per impostare lo stato
+
+Usiamo lo stato per le cose che cambiano spesso nella nostra applicazione  
