@@ -188,3 +188,79 @@ export default function App() {
 
 
 
+# ToDo List
+
+Per creare il profetto digitiamo questo comando; scegliamo il tipo di progetto **blank**.
+
+```shell
+$ expo init ToDoList
+```
+
+## Creazione di componenti
+
+Per creare un componente non ci basta altro che creare una nuova cartella chiamata **components**, al cui interno potremo creare i nostri componenti sottoforma di files **javascript**.
+
+Nel nostro caso, il primo componente da creare è il **Task**, ovvero un componente grafico che ci permette di visualizzare un task che dobbiamo completare; la sua forma basilare è la seguente:
+
+```javascript
+import react from "react";
+import {View, Text, StyleSheet} from 'react-native';
+
+const Task = () => {
+    return(
+        <View>
+            <Text>
+                Questo è un task
+            </Text>
+        </View>
+    )
+}
+
+/**
+ * gli stili grafici del componente
+ */
+const styles = StyleSheet.create({
+
+});
+
+export default Task;    // in questo modo può essere referenziato in altri files
+```
+
+A noi interessa creare dei Components perchè dobbiamo poter riutilizzare questi componenti in più aree della nostra applicazione; ad esempio, il component Task verrà utilizzato diverse volte per visualizzare più tasks.
+
+## Passare argomenti ai components
+
+Per passare degli argomenti (ad esempio del testo da visualizzare), ci basta dire che il nostro Task riceve dei **props**:
+
+```javascript
+/**
+ * 
+ * @param {*} props gli argomenti da visualizzare
+ * @returns la view
+ */
+const Task = (props) => {
+    return(
+        // visualizzo il testo passato come argomento
+        <View>
+            <Text>
+                {props.text}    
+            </Text>
+        </View>
+    )
+}
+```
+
+In questo modo, possiamo "inviare" del testo al nostro task dal file App.js:
+
+```javascript
+<View style={styles.items}>
+    {/** qui è dove andranno visualizzati i task */}
+	<Task text = {'task 1'}/>
+    <Task text = {'task 2'}/>
+    <Task text = {'task 3'}/>
+</View>
+```
+
+Quello che otteniamo è qualcosa del genere:
+
+![](https://i.ibb.co/f9wQ2nT/Screenshot-20220411-125029.png)
