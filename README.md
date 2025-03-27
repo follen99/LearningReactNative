@@ -26,16 +26,24 @@ apt-get install -y nodejs
 
 ### Creare un progetto
 
-Per creare un progetto React-Native la prima cosa da fare è usare il comando `expo init`:
-
 ```shell
-expo init NuovoProgetto
-
-cd NuovoProgetto
-npm start # you can also use: expo start
+npx create-expo-app --template
 ```
 
-Per altre informazioni fare riferimento a [questo](https://reactnative.dev/docs/environment-setup) link.
+Seleziona un template con le frecce (up/down) e premi invio.
+
+Viene poi creata una cartella, e per eseguire basta digitare:
+
+```shell
+To run your project, navigate to the directory and run one of the following npm commands.
+
+- cd simpleTestApp
+- npm run android
+- npm run ios # you need to use macOS to build the iOS project - use managed workflow if you need to do iOS development without a Mac
+- npm run web
+```
+
+
 
 ## Struttura del progetto
 
