@@ -27,7 +27,9 @@ apt-get install -y nodejs
 ### Creare un progetto
 
 ```shell
-npx create-expo-app --template
+opzione1: npx create-expo-app --template
+
+opzione2: npx @react-native-community/cli init Awesome01
 ```
 
 Seleziona un template con le frecce (up/down) e premi invio.
@@ -41,6 +43,17 @@ To run your project, navigate to the directory and run one of the following npm 
 - npm run android
 - npm run ios # you need to use macOS to build the iOS project - use managed workflow if you need to do iOS development without a Mac
 - npm run web
+```
+
+### Check ADB
+
+Per effettuare un check ADB digitare
+
+```shell
+$ adb devices -l
+> List of devices attached
+> emulator-5554          device product:sdk_gphone64_x86_64 
+> model:sdk_gphone64_x86_64 device:emu64xa transport_id:5
 ```
 
 
