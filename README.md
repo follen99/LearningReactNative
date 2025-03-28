@@ -54,6 +54,8 @@ To run your project, navigate to the directory and run one of the following npm 
 - npm run web
 ```
 
+Se l'applicazione non viene eseguita correttamente, avviare il server metro con il comando:  `npx react-native start`
+
 ### Check ADB
 
 Per effettuare un check ADB digitare
