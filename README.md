@@ -54,7 +54,15 @@ To run your project, navigate to the directory and run one of the following npm 
 - npm run web
 ```
 
-Se l'applicazione non viene eseguita correttamente, avviare il server metro con il comando:  `npx react-native start`
+Se l'applicazione non viene eseguita correttamente, avviare il server metro con il comando:  `npx react-native start` oppure `npx react-native run-android` (metodo preferito dal corso); quest'ultimo richiede la dipendenza nel file `package.json`:
+
+```json
+"devDependencies": {
+    "@react-native-community/cli": "latest",
+  }
+```
+
+Per applicare le dipendenze basta reinstallare le dipendenze con `npm install`; questo comando aggiorna la cartella`node_modules`.
 
 ### Check ADB
 
@@ -67,11 +75,16 @@ $ adb devices -l
 > model:sdk_gphone64_x86_64 device:emu64xa transport_id:5
 ```
 
-
-
 ## Struttura del progetto
 
 Un progetto React Native ha diversi files, ed è bene conoscere le funzioni di ognuno di essi.
+
+### Files
+
+- `app.json`: è il file di configurazione principale (buttons, etc.), il file da cui le app prenderanno il nome
+- `App.tsx`: file principale che permette di mostrare a schermo i componenti
+- `babel.config.js`: file di bundler, combina tutti i files javascript e permette l'esecuzione sia su web che mobile.
+- `index.js`: importa il filename dell'app da `app.json` visto prima
 
 ### assets/
 
