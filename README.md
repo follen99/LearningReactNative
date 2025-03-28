@@ -32,9 +32,18 @@ opzione1: npx create-expo-app --template
 opzione2: npx @react-native-community/cli init Awesome01
 ```
 
+Dopodichè potrebbe essere utile rendere il progetto una semplice directory, e non un repository git (viene creato automaticamente); per togliere i file di git lanciare i comandi:
+
 Seleziona un template con le frecce (up/down) e premi invio.
 
-Viene poi creata una cartella, e per eseguire basta digitare:
+Viene poi creata una cartella contenente il progetto.
+
+```shell
+del /F /S /Q /A .git
+rmdir /s /q .git
+```
+
+Per eseguire basta digitare:
 
 ```shell
 To run your project, navigate to the directory and run one of the following npm commands.
