@@ -29,6 +29,7 @@ import {
 import FlatCards from './components/FlatCards';
 import ElevatedCards from './components/ElevatedCards';
 import ImagesCards from './components/ImagesCards';
+import Buttons from './components/Buttons';
 
 
 function App(): React.JSX.Element {
@@ -36,11 +37,13 @@ function App(): React.JSX.Element {
     <SafeAreaView style={{ paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0 }}>
       <ScrollView>
         <StatusBar barStyle="dark-content" />
-        <FlatCards />
+        {/*<FlatCards />*/}
 
-        <ElevatedCards />
+        {/*<ElevatedCards />*/}
 
-        <ImagesCards />
+        {/*<ImagesCards />*/}
+
+        <Buttons />
 
       </ScrollView>
     </SafeAreaView>
