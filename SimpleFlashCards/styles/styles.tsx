@@ -13,11 +13,13 @@ const styles = StyleSheet.create({
         color: colors.textDark,
         fontSize: 20,
         fontWeight: "bold",
+        marginLeft: 10,
     },
 
     container: {
         flex: 1,
         flexDirection: "row",
+        justifyContent: "flex-start",
     },
 
     card: {
