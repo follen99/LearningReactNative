@@ -1,45 +1,50 @@
-import React from "react";
+import React, { JSX } from 'react';
 
 // importo alcuni componenti di react-native
 import {
   View,         // per creare un layout
   Text,         // per visualizzare del testo
   SafeAreaView, // per evitare il problema della notch sugli smartphone
-  Button,
-  Alert
+  StyleSheet,   // per gestire gli stili
+  useColorScheme, // per gestire il tema chiaro/scuro
+  Appearance, // per gestire il tema chiaro/scuro
 } from "react-native";
 
-function App() {
-  /**
-   * utilizziamo JSX per creare un layout
-   * jsx non è ne html ne xml, è un linguaggio di markup derivato da javascript
-   * Ogni tag aperto deve essere chiuso.
-   */
-  const myView = <SafeAreaView style={{justifyContent: "center", flex: 1}}>
-    <View style={{backgroundColor: "red", alignItems: "center", padding: 20, margin: 20}}>
-      <Text>
-        Hello World! This is my first React Native App.
+function App(): JSX.Element {
+  const colorScheme = useColorScheme();
+  const isDarkMode = colorScheme === "dark"; // per sapere se il tema è scuro o chiaro
+  const preferredAppearance = Appearance.getColorScheme(); // per sapere se il tema è scuro o chiaro
+
+  return(
+    <View style={styles.container}>
+      <Text style={isDarkMode ? styles.white : styles.black}> 
+        schema colori: {colorScheme} {'\n'}
+        tema preferito: {preferredAppearance} {'\n'}
       </Text>
-
-      <Button
-        title="Click me!"
-        onPress={buttonClicked}
-        accessibilityLabel=""
-      />
     </View>
-  </SafeAreaView>
-
-  // ritorniamo il layout creato, altrimenti non viene visualizzato nulla.
-  return myView;
+  )
 }
 
-function buttonClicked() {
-  Alert.alert("Button clicked!", "You clicked the button!", [
-    {text: "OK", 
-      onPress: () => {},
-      style: "default"
-    },
-  ]);
-}
+const styles = StyleSheet.create({
+  // possiamo usare questo stile per tutti i contenitori
+  container: {
+    flex: 1,  // per occupare tutto lo spazio disponibile
+    alignItems: "center", // per centrare gli elementi orizzontalmente
+    justifyContent: "center", // per centrare gli elementi verticalmente
+  },
 
+  textAlignment: {
+    textAlign: "center", // per centrare il testo
+  },
+
+  white: {
+    color: "white", // per il testo bianco
+  },
+
+  black: {
+    color: "black", // per il testo bianco
+  }
+})
+
+// esportiamo il componente per poterlo utilizzare in altri file
 export default App;
