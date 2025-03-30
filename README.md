@@ -33,7 +33,7 @@ opzione1: npx create-expo-app nomeApp --template template
 opzione2: npx create-expo-app nomeApp
 ```
 
-Seleziona un template con le frecce (up/down) e premi invio.
+Se non è stato selezionato un template, bisogna selezionare un template con le frecce (up/down) e premi invio (default è la scelta più comune).
 
 Viene poi creata una cartella contenente il progetto.
 
@@ -50,7 +50,7 @@ Possiamo poi configurare il routing installando le dipendenze:
 npx expo install expo-router react-native-safe-area-context react-native-screens expo-linking expo-constants expo-status-bar
 ```
 
-
+Possiamo "ripulire" il progetto portandolo al bare minimum eseguendo lo script `npm run reset-project`
 
 #### No EXPO
 
