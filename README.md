@@ -44,6 +44,12 @@ del /F /S /Q /A .git
 rmdir /s /q .git
 ```
 
+Possiamo poi configurare il routing installando le dipendenze:
+
+```shell
+npx expo install expo-router react-native-safe-area-context react-native-screens expo-linking expo-constants expo-status-bar
+```
+
 
 
 #### No EXPO
