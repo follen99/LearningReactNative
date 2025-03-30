@@ -50,7 +50,54 @@ Possiamo poi configurare il routing installando le dipendenze:
 npx expo install expo-router react-native-safe-area-context react-native-screens expo-linking expo-constants expo-status-bar
 ```
 
-Possiamo "ripulire" il progetto portandolo al bare minimum eseguendo lo script `npm run reset-project`
+Possiamo "ripulire" il progetto portandolo al bare minimum eseguendo lo script `npm run reset-project`.
+
+##### TailwindCss
+
+Tailwind CSS è un framework CSS utility-first che ti permette di costruire interfacce utente in modo rapido e personalizzabile. Invece di scrivere regole CSS personalizzate, utilizzi classi predefinite per applicare stili direttamente nel markup HTML o JSX. In altre parole è la stessa cosa di usare BootStrap con HTML.
+
+Per utilizzare **TailwindCss** digitiamo:
+
+```shell
+npm install nativewind tailwindcss react-native-reanimated react-native-safe-area-context
+```
+
+Per generare i files di configurazione digitiamo `npx tailwindcss init`; questo crea il file `tailwind.config.js` ([pagina nativewind](https://www.nativewind.dev/getting-started/installation)).
+
+Dopo aver fatto questo creiamo un nuovo file: `/app/global.css`, che viene utilizzato per definire stili CSS globali che si applicano a tutta l'applicazione, in cui incolliamo: 
+
+```
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+Creiamo anche un file `babel.config.js` nella root del progetto; è una configurazione per **Babel**, un transpiler JavaScript. Babel converte il codice moderno (ES6+, JSX, ecc.) in una versione compatibile con i browser o ambienti che non supportano le funzionalità più recenti. Nel fille scriviamo:
+
+```js
+module.exports = function (api) {
+  api.cache(true);
+  return {
+    presets: [
+      ["babel-preset-expo", { jsxImportSource: "nativewind" }],
+      "nativewind/babel",
+    ],
+  };
+};
+```
+
+Digitiamo poi `npx expo customize metro.config.js`, che genera il file `metro.config.js`; andiamo a sovrascriverne il contenuto con:
+
+```js
+const { getDefaultConfig } = require("expo/metro-config");
+const { withNativeWind } = require('nativewind/metro');
+
+const config = getDefaultConfig(__dirname)
+
+module.exports = withNativeWind(config, { input: './global.css' })
+```
+
+Per applicare tutti i cambiamenti avviare il server expo con `npx expo start --clear`.
 
 #### No EXPO
 
