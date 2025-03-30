@@ -26,22 +26,33 @@ apt-get install -y nodejs
 
 ### Creare un progetto
 
+#### EXPO
+
 ```shell
-opzione1: npx create-expo-app --template
-
-opzione2: npx @react-native-community/cli init Awesome01
+opzione1: npx create-expo-app nomeApp --template template
+opzione2: npx create-expo-app nomeApp
 ```
-
-Dopodichè potrebbe essere utile rendere il progetto una semplice directory, e non un repository git (viene creato automaticamente); per togliere i file di git lanciare i comandi:
 
 Seleziona un template con le frecce (up/down) e premi invio.
 
 Viene poi creata una cartella contenente il progetto.
 
+Dopodichè potrebbe essere utile rendere il progetto una semplice directory, e non un repository git (viene creato automaticamente); per togliere i file di git lanciare i comandi:
+
 ```shell
 del /F /S /Q /A .git
 rmdir /s /q .git
 ```
+
+
+
+#### No EXPO
+
+```shell
+npx @react-native-community/cli init Awesome01
+```
+
+
 
 Per eseguire basta digitare:
 
