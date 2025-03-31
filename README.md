@@ -28,6 +28,8 @@ apt-get install -y nodejs
 
 #### EXPO
 
+Come prima cosa, bisogna installare expo con il comando: `npm install expo`, successivamente aggiornare le dipendenze con `npx expo install`.
+
 ```shell
 opzione1: npx create-expo-app nomeApp --template template
 opzione2: npx create-expo-app nomeApp
