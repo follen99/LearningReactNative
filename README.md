@@ -120,6 +120,7 @@ To run your project, navigate to the directory and run one of the following npm 
 - npm run web
 ```
 
+Oppure 
 Se l'applicazione non viene eseguita correttamente, avviare il server metro con il comando:  `npx react-native start` oppure `npx react-native run-android` (metodo preferito dal corso); quest'ultimo richiede la dipendenza nel file `package.json`:
 
 ```json
