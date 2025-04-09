@@ -112,7 +112,9 @@ export default function CalculatorScreen({navigation}: { navigation: any }): JSX
                     style={styles.button}
                     onPress={() => pressOperator(operator)}
                 >
-                  <Text style={styles.buttonText}>{operator}</Text>
+                  <Text style={styles.buttonText}>
+                    <MyIcon icon={operator}/>
+                  </Text>
                 </TouchableOpacity>
             ))}
           </View>
@@ -124,6 +126,36 @@ export default function CalculatorScreen({navigation}: { navigation: any }): JSX
 
       </View>
   );
+}
+
+const MyIcon = ({icon} : {icon : string}) => {
+  if (icon == "+") {
+    return (
+        <Text style={styles.buttonText}>+</Text>
+    )
+  }
+  switch (icon) {
+    case "+":
+      return (
+          <Text style={styles.buttonText}>+</Text>
+      )
+    case "-":
+      return (
+          <Text style={styles.buttonText}>-</Text>
+      )
+    case "*":
+      return (
+          <Text style={styles.buttonText}>*</Text>
+      )
+    case "/":
+      return (
+          <Text style={styles.buttonText}>/</Text>
+      )
+    default:
+      return (
+          <Text style={styles.buttonText}>?</Text>
+      )
+  }
 }
 
 const styles = StyleSheet.create({
