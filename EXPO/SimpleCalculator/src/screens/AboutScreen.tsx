@@ -14,6 +14,7 @@ export default function AboutScreen(): JSX.Element{
   // Recupera i dati salvati all'avvio
   /*
   useEffect viene eseguito quando il componente viene montato per la prima volta.
+  useFocusEffect viene eseguito ogni volta che il componente viene visualizzato.
    */
   useFocusEffect(
       useCallback(() => {
