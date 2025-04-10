@@ -1,7 +1,10 @@
-import React, {useState} from 'react';
-import {View, Text, Button, StyleSheet, TouchableOpacity} from 'react-native';
+import React, {useCallback, useEffect, useState} from 'react';
+import {View, Text, Button, StyleSheet, TouchableOpacity, Image, SafeAreaView} from 'react-native';
 import {colors} from "../constants/theme";
 import * as assert from "node:assert";
+import {icons} from "../constants/icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {useFocusEffect} from "@react-navigation/native";
 
 export default function CalculatorScreen({navigation}: { navigation: any }): JSX.Element {
   const numbersButtons = [
@@ -9,7 +12,6 @@ export default function CalculatorScreen({navigation}: { navigation: any }): JSX
     ['4', '5', '6'],
     ['7', '8', '9'],
   ];
-
   const operatorsButtons = ['+', '-', '*', '/'];
 
   // dichiarazione di variabili che possono cambiare
@@ -57,81 +59,125 @@ export default function CalculatorScreen({navigation}: { navigation: any }): JSX
     setOperand(null);
     setOperator(null);
   }
+
+  const [nome, setNome] = useState('');
+  const [cognome, setCognome] = useState('');
+
+  /*
+  Parte di codice che viene eseguita ogni volta che la view viene visualizzata
+   */
+  useFocusEffect(
+      useCallback(() => {
+        const loadData = async () => {
+          try {
+            const nomeSalvato = await AsyncStorage.getItem('nome');
+            const cognomeSalvato = await AsyncStorage.getItem('cognome');
+            if (nomeSalvato !== null) setNome(nomeSalvato);
+            if (cognomeSalvato !== null) setCognome(cognomeSalvato);
+          } catch (error) {
+            console.log('Errore nel caricamento dati:', error);
+          }
+        };
+        loadData();
+      }, [])
+  )
+
   return (
-      <View>
-        <View style={styles.display}>
-          <Text style={styles.displayText}>
-            {display}
-          </Text>
-        </View>
+      <SafeAreaView>
+        <View>
 
-        <View style={{ flexDirection: 'row' }}>
-          {/* Sezione dei numeri */}
-          <View style={{ flex: 3 }}>
-            {numbersButtons.map((row, rowIndex) => (
-                <View key={rowIndex} style={styles.row}>
-                  {row.map((button, buttonIndex) => (
-                      <TouchableOpacity
-                          key={buttonIndex}
-                          style={styles.button}
-                          onPress={() => pressButton(button)}
-                      >
-                        <Text style={styles.buttonText}>{button}</Text>
-                      </TouchableOpacity>
-                  ))}
-                </View>
-            ))}
-            <View style={styles.row}>
-              <TouchableOpacity
-                  style={styles.button}
-                  onPress={() => pressButton('0')}
-              >
-                <Text style={styles.buttonText}>0</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                  style={styles.accentButton}
-                  onPress={() => setDisplay('0')} // Gestione per 'AC'
-              >
-                <Text style={styles.accentButtonText}>AC</Text>
-              </TouchableOpacity>
+          {/*Mostro nome e cognome recuperati da db*/}
+          <View style={styles.nameContainer}>
+            <Text style={styles.nameText}>
+              Ciao {nome} {cognome}!
+            </Text>
+          </View>
 
-              <TouchableOpacity
-                  style={styles.accentButton}
-                  onPress={calculate} // Gestione per '='
-              >
-                <Text style={styles.accentButtonText}>=</Text>
-              </TouchableOpacity>
+
+          <View style={styles.display}>
+            <Text style={styles.displayText}>
+              {display}
+            </Text>
+          </View>
+
+          <View style={{ flexDirection: 'row' }}>
+            {/* Sezione dei numeri */}
+            <View style={{ flex: 3 }}>
+              {numbersButtons.map((row, rowIndex) => (
+                  <View key={rowIndex} style={styles.row}>
+                    {row.map((button, buttonIndex) => (
+                        <TouchableOpacity
+                            key={buttonIndex}
+                            style={styles.button}
+                            onPress={() => pressButton(button)}
+                        >
+                          <Text style={styles.buttonText}>{button}</Text>
+                        </TouchableOpacity>
+                    ))}
+                  </View>
+              ))}
+              <View style={styles.row}>
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => pressButton('0')}
+                >
+                  <Text style={styles.buttonText}>0</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.accentButton}
+                    onPress={() => setDisplay('0')} // Gestione per 'AC'
+                >
+                  <Text style={styles.accentButtonText}>AC</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                    style={styles.accentButton}
+                    onPress={calculate} // Gestione per '='
+                >
+                  <Text style={styles.accentButtonText}>=</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+
+            {/* Sezione degli operatori */}
+            <View style={{ justifyContent: 'space-around' }}>
+              {operatorsButtons.map((operator, index) => (
+                  <TouchableOpacity
+                      key={index}
+                      style={styles.button}
+                      onPress={() => pressOperator(operator)}
+                  >
+                    <Text style={styles.buttonText}>
+                      <Signs icon={operator}/>
+                    </Text>
+                  </TouchableOpacity>
+              ))}
             </View>
           </View>
-
-          {/* Sezione degli operatori */}
-          <View style={{ justifyContent: 'space-around' }}>
-            {operatorsButtons.map((operator, index) => (
-                <TouchableOpacity
-                    key={index}
-                    style={styles.button}
-                    onPress={() => pressOperator(operator)}
-                >
-                  <Text style={styles.buttonText}>
-                    <MyIcon icon={operator}/>
-                  </Text>
-                </TouchableOpacity>
-            ))}
-          </View>
         </View>
 
+        {/* Icon in the bottom-right corner */}
+        <TouchableOpacity
+            style={[styles.aboutIcon]}
+            onPress={() => navigation.navigate('About')}
+        >
+          <Image source={icons.about} style={styles.aboutImage} />
+        </TouchableOpacity>
+      </SafeAreaView>
 
-
-
-
-      </View>
   );
 }
 
-const MyIcon = ({icon} : {icon : string}) => {
+/**
+ * Restituisce un componente React che rappresenta un'icona a seconda del simbolo passato.
+ * @param icon  Il simbolo dell'icona da visualizzare.
+ * @constructor
+ */
+const Signs = ({icon} : {icon : string})  => {
   if (icon == "+") {
     return (
         <Text style={styles.buttonText}>+</Text>
+        // <Image source={icons.plus}/>
     )
   }
   switch (icon) {
@@ -165,10 +211,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: colors.background,
   },
-
-
   display: {
     fontSize: 24,
+    margin: 10,
     marginBottom: 20,
     color: colors.text,
   },
@@ -189,7 +234,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-
   accentButton: {
     flex: 1,
     margin: 5,
@@ -199,13 +243,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-
   accentButtonText: {
     color: colors.primary,
     fontSize: 18,
     fontWeight: 'bold',
   },
-
   buttonText: {
     color: colors.text,
     fontSize: 18,
@@ -219,7 +261,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     width: '100%',
   },
-
   operatorsContainer: {
     flex: 1,
     justifyContent: 'space-around', // Spaziatura uniforme tra i tasti
@@ -227,5 +268,32 @@ const styles = StyleSheet.create({
     flexDirection: 'column',        // Disposizione verticale
     marginLeft: 10,                 // Margine per separare i tasti dal resto
   },
+
+  aboutIcon: {
+    alignSelf: 'flex-end',
+    margin: 20,
+  },
+
+  aboutImage: {
+    width: 50,
+    height: 50,
+  },
+
+  nameContainer: {
+    backgroundColor: colors.background,
+    padding: 10,
+    borderRadius: 8,
+    margin: 10,
+    marginBottom: 20,
+    alignItems: 'center',
+  },
+
+  nameText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: colors.primary,
+  }
+
+
 
 })
