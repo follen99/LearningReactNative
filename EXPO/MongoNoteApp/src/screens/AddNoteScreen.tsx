@@ -1,6 +1,9 @@
-import {StyleSheet, View, Text, TextInput, Button, TouchableOpacity, Alert} from "react-native";
+import {StyleSheet, View, Text, TouchableOpacity, Alert} from "react-native";
+import {TextInput, Button} from "react-native-paper";
 import {useEffect, useState} from "react";
 import {fetch} from "expo/fetch";
+import TextInputOutlined
+  from "react-native-paper/lib/typescript/components/TextInput/TextInputOutlined";
 const BASE_SERVICE_URI = "http://10.0.2.2:5000/api/notes";
 
 export default function AddNoteScreen({navigation} : {navigation: any}) {
@@ -11,7 +14,7 @@ export default function AddNoteScreen({navigation} : {navigation: any}) {
     <View>
       <Text style={styles.title}>Add new note</Text>
 
-      <TextInput
+      {/*<TextInput
           style={styles.noteMainText}
           placeholder="Note title"
           value={title}
@@ -24,12 +27,41 @@ export default function AddNoteScreen({navigation} : {navigation: any}) {
           multiline
           value={content}
           onChangeText={setContent}
+      />*/}
+
+      <TextInput
+          label={"Note title"}
+          value={title}
+          onChangeText={setTitle}
+          numberOfLines={1}
+          style={{
+            margin: 10,
+          }}
       />
+
+      <TextInput
+          label={"Note content"}
+          value={content}
+          onChangeText={setContent}
+          multiline={true}
+          style={{
+            margin: 10,
+          }}
+      />
+
       
       {/*<Button title={"Add Note"} onPress={() => navigation.navigate("Home")}/>*/}
-      <TouchableOpacity style={styles.confirmButton} onPress={() => addNote(title, content, {navigation})}>
+      {/*<TouchableOpacity style={styles.confirmButton} onPress={() => addNote(title, content, {navigation})}>
         <Text style={styles.confirmButtonText}>Confirm</Text>
-      </TouchableOpacity>
+      </TouchableOpacity>*/}
+      <Button
+          mode="contained"
+          onPress={() => console.log('Pressed')}
+          style={{margin: 10}}
+          onPressOut={() => addNote(title, content, {navigation})}
+      >
+        Confirm
+      </Button>
     </View>
   );
 }

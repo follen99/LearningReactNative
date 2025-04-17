@@ -1,4 +1,4 @@
-import {Button, View, Text} from "react-native";
+import {Button, View, Text, StyleSheet} from "react-native";
 import {useEffect, useState} from "react";
 
 import NotesList from "../components/NotesList";
@@ -26,7 +26,7 @@ export default function HomeScreen({navigation}: {navigation: any}) {
   }, [isFocused]);
 
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+    <View style={styles.list}>
       <Text>Home Screen</Text>
       <NotesList notes={notes}/>
 
@@ -34,3 +34,11 @@ export default function HomeScreen({navigation}: {navigation: any}) {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  list: {
+    flex: 1,
+    padding: 10,
+    backgroundColor: '#fff',
+  }
+})
