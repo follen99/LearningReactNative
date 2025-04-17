@@ -1,3 +1,7 @@
+/**
+ * File che esplicita il path per raggiungere
+ * diversi endpoint del servizio REST
+ */
 import express from 'express';
 import { createNote, getNotes, updateNote, deleteNote }
   from '../controllers/notesController.js';

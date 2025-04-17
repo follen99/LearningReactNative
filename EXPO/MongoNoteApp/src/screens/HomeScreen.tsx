@@ -17,7 +17,7 @@ export default function HomeScreen({navigation}: {navigation: any}) {
       /*
     L'indirizzo 10.0.2.2 è usato per accedere al localhost dell'emulatore Android.
      */
-      console.log("STAMPA:" + BASE_SERVICE_URI + '/')
+      console.log("FETCHING from:" + BASE_SERVICE_URI + '/')
       fetch(BASE_SERVICE_URI + '/')
       .then(response => response.json())
       .then(data => setNotes(data))
@@ -28,7 +28,7 @@ export default function HomeScreen({navigation}: {navigation: any}) {
   return (
     <View style={styles.list}>
       <Text>Home Screen</Text>
-      <NotesList notes={notes}/>
+      <NotesList notes={notes} navigation={navigation}/>
 
       <Button title={"Add Note"} onPress={() => navigation.navigate(AddNoteScreen)}></Button>
     </View>
