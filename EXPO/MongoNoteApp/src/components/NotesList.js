@@ -9,7 +9,7 @@ const NotesList = ({ notes, navigation}) => {
           data={notes}
           keyExtractor={(item) => item._id}
           renderItem={({ item }) => (
-              <TouchableOpacity onPress={() => navigation.navigate(FocusNote)}>
+              <TouchableOpacity onPress={() => navigation.navigate('FocusNote', { note: item })}>
                 <NoteCard item={item} />
               </TouchableOpacity>
           )}

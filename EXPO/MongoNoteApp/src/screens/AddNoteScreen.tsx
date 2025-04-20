@@ -1,9 +1,7 @@
-import {StyleSheet, View, Text, TouchableOpacity, Alert} from "react-native";
+import {StyleSheet, View, Text, Alert} from "react-native";
 import {TextInput, Button} from "react-native-paper";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {fetch} from "expo/fetch";
-import TextInputOutlined
-  from "react-native-paper/lib/typescript/components/TextInput/TextInputOutlined";
 const BASE_SERVICE_URI = "http://10.0.2.2:5000/api/notes";
 
 export default function AddNoteScreen({navigation} : {navigation: any}) {

@@ -1,13 +1,15 @@
 import {View} from "react-native";
-import NoteModel from "../model/NoteModel";
 import {Card, Text} from "react-native-paper";
+import {useRoute} from "@react-navigation/native";
 
-export default function FocusNote(/*{note}: {note: any}*/) {
-  // const { note } = route.params;
+export default function FocusNote() {
+  const route = useRoute();
+  const {note} = route.params as {note: any};
+  console.log("NOTE: ", note);
 
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      {/*<Card style={{ width: '100%' }}>
+      <Card style={{ width: '100%' }}>
         <Card.Content>
           <Text variant="titleLarge" style={{ marginBottom: 10 }}>
             {note.title}
@@ -16,7 +18,7 @@ export default function FocusNote(/*{note}: {note: any}*/) {
             {note.content}
           </Text>
         </Card.Content>
-      </Card>*/}
+      </Card>
     </View>
   );
 }
