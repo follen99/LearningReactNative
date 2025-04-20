@@ -30,7 +30,7 @@ export default function HomeScreen({navigation}: {navigation: any}) {
       <Text>Home Screen</Text>
       <NotesList notes={notes} navigation={navigation}/>
 
-      <Button title={"Add Note"} onPress={() => navigation.navigate(AddNoteScreen)}></Button>
+      <Button title={"Add Note"} onPress={() => navigation.navigate('AddNoteScreen')}></Button>
     </View>
   );
 }

@@ -2,11 +2,15 @@ import {StyleSheet, View, Text, Alert} from "react-native";
 import {TextInput, Button} from "react-native-paper";
 import {useState} from "react";
 import {fetch} from "expo/fetch";
+import { useNavigation } from "@react-navigation/native";
 const BASE_SERVICE_URI = "http://10.0.2.2:5000/api/notes";
 
-export default function AddNoteScreen({navigation} : {navigation: any}) {
+export default function AddNoteScreen() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+
+  const navigation = useNavigation();
+
 
   return (
     <View>
@@ -65,6 +69,10 @@ export default function AddNoteScreen({navigation} : {navigation: any}) {
 }
 
 function addNote(title: string, content: string, {navigation}: {navigation:any} ) {
+  if (!title || !content) {
+    Alert.alert('Error', 'Please fill in both title and content fields.');
+    return;
+  }
   fetch(BASE_SERVICE_URI + "/", {
     method: "POST",
     headers: {
