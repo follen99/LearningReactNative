@@ -51,11 +51,6 @@ export default function AddNoteScreen() {
           }}
       />
 
-      
-      {/*<Button title={"Add Note"} onPress={() => navigation.navigate("Home")}/>*/}
-      {/*<TouchableOpacity style={styles.confirmButton} onPress={() => addNote(title, content, {navigation})}>
-        <Text style={styles.confirmButtonText}>Confirm</Text>
-      </TouchableOpacity>*/}
       <Button
           mode="contained"
           onPress={() => console.log('Pressed')}
