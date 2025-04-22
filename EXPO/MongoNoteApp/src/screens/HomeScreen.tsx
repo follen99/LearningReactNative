@@ -21,6 +21,20 @@ export default function HomeScreen() {
           if (token) {
             console.log('JWT Token:', token);
             // You can use the token here, e.g., include it in the fetch headers
+
+            fetch(BASE_SERVICE_URI + '/', {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+              },
+            }).then(response => response.json())
+              .then(data => {
+                console.log('message:', data);
+                setNotes(data);
+              })
+              .catch(error => console.error('Error fetching notes:', error));
+
           } else {
             console.warn('No JWT Token found');
           }
@@ -31,10 +45,14 @@ export default function HomeScreen() {
     L'indirizzo 10.0.2.2 è usato per accedere al localhost dell'emulatore Android.
      */
       console.log("FETCHING from:" + BASE_SERVICE_URI + '/')
-      fetch(BASE_SERVICE_URI + '/')
+      
+      
+
+
+      /* fetch(BASE_SERVICE_URI + '/')
         .then(response => response.json())
         .then(data => setNotes(data))
-        .catch(error => console.error('Error fetching notes:', error));
+        .catch(error => console.error('Error fetching notes:', error)); */
     }
   }, [isFocused]);
 

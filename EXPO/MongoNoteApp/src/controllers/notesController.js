@@ -2,7 +2,15 @@ import Note from '../model/NoteModel.js';
 
 export const createNote = async (req, res) => {
   try {
-    const note = new Note(req.body);
+    const userId = req.user.id; // Assuming you have user ID in req.user
+    console.log("User", req.body);
+    const note = new Note({
+      /*
+      con i tre puntini (...) prendo i campi che mi servono dal body della richiesta
+      */
+      ...req.body,  
+      user: userId, // aggiungo anche l'ID dell'utente alla nota
+    });
     await note.save();
     res.status(201).json(note);
   } catch (error) {
@@ -12,7 +20,12 @@ export const createNote = async (req, res) => {
 
 export const getNotes = async (req, res) => {
   try {
-    const notes = await Note.find();
+    console.log("User", req.body);
+    const userId = req.user.id; // Assuming you have user ID in req.user
+    const notes = await Note.find({ user: userId });  // filtra le note per l'utente
+    if (!notes) {
+      return res.status(404).json({ message: "No notes found" });
+    }
     res.status(200).json(notes);
   } catch (error) {
     res.status(500).json({ error: error.message });

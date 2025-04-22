@@ -1,5 +1,6 @@
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { NavigationProp, useNavigation, useRoute } from "@react-navigation/native";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { RootStackParamList } from "../navigation/AppNavigator";
 
 export default function Entry() {
     const route = useRoute();

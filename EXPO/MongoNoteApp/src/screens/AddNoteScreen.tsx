@@ -3,6 +3,7 @@ import {TextInput, Button} from "react-native-paper";
 import {useState} from "react";
 import {fetch} from "expo/fetch";
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const BASE_SERVICE_URI = "http://10.0.2.2:5000/api/notes";
 
 export default function AddNoteScreen() {
@@ -68,7 +69,46 @@ function addNote(title: string, content: string, {navigation}: {navigation:any} 
     Alert.alert('Error', 'Please fill in both title and content fields.');
     return;
   }
-  fetch(BASE_SERVICE_URI + "/", {
+
+  AsyncStorage.getItem('jwtToken')
+    .then(token => {
+      if (token) {
+        console.log('JWT Token:', token);
+        // You can use the token here, e.g., include it in the fetch headers
+        fetch(BASE_SERVICE_URI + '/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            title: title,
+            content: content,
+            date: new Date(),
+          }),
+        })
+        .then(response => {
+          if (!response.ok) {
+            return response.text().then(errorMessage => {
+              throw new Error(errorMessage);
+            });
+          }
+          return response.json();
+        })
+        .then(() => {
+          navigation.goBack();
+        })
+        .catch(error => {
+          console.error('Error adding note:', error);
+          Alert.alert('Error', 'Error adding note: ' + error.message);
+        });
+      } else {
+        console.warn('No JWT Token found');
+      }
+    })
+    .catch(error => console.error('Error retrieving JWT Token:', error));
+
+  /* fetch(BASE_SERVICE_URI + "/", {
     method: "POST",
     headers: {
       'Content-Type': 'application/json',
@@ -91,7 +131,7 @@ function addNote(title: string, content: string, {navigation}: {navigation:any} 
   .catch(error => {
     console.error('Error adding note:', error);
     Alert.alert('Error', 'Error adding note: ' + error.message);
-  });
+  }); */
 }
 
 const styles = StyleSheet.create({
