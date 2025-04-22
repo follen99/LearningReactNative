@@ -8,15 +8,15 @@ import {
     Alert,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { RootStackParamList } from "../../navigation/AppNavigator";
+import { useNavigation } from "@react-navigation/native";
+import { NavigationProp } from "../../navigation/types";
 
 const BASE_SERVICE_URI = "http://10.0.2.2:5000/api/accounts";
 
 export default function LoginScreen() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+    const navigation = useNavigation<NavigationProp>();
 
     const handleLogin = async () => {
         if (!email || !password) {
@@ -43,7 +43,7 @@ export default function LoginScreen() {
                 // non permetto di tornare indietro alla schermata di login
                 navigation.reset({
                     index: 0,                       // Reset the navigation stack
-                    routes: [{ name: "Notes" }],    // Navigate to the Notes screen
+                    routes: [{ name: "HomeScreen" }],    // Navigate to the Notes screen
                 });
             } else {
                 Alert.alert("Error", data.message || "Login failed.");

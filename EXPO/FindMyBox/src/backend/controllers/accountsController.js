@@ -75,3 +75,8 @@ export const login = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+// se arriva qui, significa che il token è valido, questo perché il middleware authenticate lo ha verificato
+export const validateToken = async (req, res) => {
+  res.status(200).json({ message: "Token is valid!" });
+}

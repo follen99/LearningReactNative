@@ -5,7 +5,8 @@ import { StackNavigationProp } from "@react-navigation/stack";
 type RootStackParamList = {
     LoginScreen: undefined;
     RegisterScreen: undefined;
-    Home: undefined;
+    EntryScreen: undefined;
+    HomeScreen: undefined;
     // Se una rotta accetta parametri: Example: { id: number }
 };
 
