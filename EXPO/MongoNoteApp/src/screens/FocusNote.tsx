@@ -18,14 +18,6 @@ export default function FocusNote({ route, navigation }: any) {
 
   console.log("NOTE: ", note);
 
-  useEffect(() => {
-    if (isFocused && route.params?.updatedNote) {
-      console.log("NOTE: ", route.params.updatedNote);
-      setTitle(route.params.updatedNote.title);
-      setContent(route.params.updatedNote.content);
-    }
-
-  }, [isFocused]);
 
   if (!note) {
     Alert.alert(

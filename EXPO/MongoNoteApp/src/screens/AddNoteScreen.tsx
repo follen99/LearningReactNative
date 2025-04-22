@@ -108,30 +108,6 @@ function addNote(title: string, content: string, {navigation}: {navigation:any} 
     })
     .catch(error => console.error('Error retrieving JWT Token:', error));
 
-  /* fetch(BASE_SERVICE_URI + "/", {
-    method: "POST",
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      title: title,
-      content: content,
-      date: new Date(),
-    }),
-  })
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Failed to add note');
-    }
-    return response.json();
-  })
-  .then(() => {
-    navigation.goBack();
-  })
-  .catch(error => {
-    console.error('Error adding note:', error);
-    Alert.alert('Error', 'Error adding note: ' + error.message);
-  }); */
 }
 
 const styles = StyleSheet.create({
