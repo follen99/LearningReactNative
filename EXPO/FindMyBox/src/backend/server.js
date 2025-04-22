@@ -2,9 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
-import connectToMongo from './src/config/databaseConnection.js';
-import notesRoutes from './src/routes/notesRoutes.js';
-import accountsRoutes from './src/routes/accountsRoutes.js';
+import connectToMongo from './config/databaseConnection.js';
+import accountRoutes from './routes/accountsRoutes.js'; // Import the accounts routes
 
 
 
@@ -29,8 +28,7 @@ const URL = 'http://localhost';
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
-app.use('/api/notes', notesRoutes);
-app.use('/api/accounts', accountsRoutes);
+app.use('/api/accounts', accountRoutes); // Use the accounts routes
 
 app.listen(PORT, () => {
   console.log(`Server is running on ${URL}:${PORT}`);
