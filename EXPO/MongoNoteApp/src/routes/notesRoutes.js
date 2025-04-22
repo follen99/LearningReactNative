@@ -14,7 +14,7 @@ const router = express.Router();
 // protezione delle rotte con il middleware di autenticazione
 router.get('/', authenticate, getNotes);
 router.post('/', authenticate, createNote);
-router.put('/:id', updateNote);
-router.delete('/:id', deleteNote);
+router.put('/:id', authenticate, updateNote);
+router.delete('/:id', authenticate, deleteNote);
 
 export default router;

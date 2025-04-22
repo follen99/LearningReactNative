@@ -3,7 +3,7 @@ import Note from '../model/NoteModel.js';
 export const createNote = async (req, res) => {
   try {
     const userId = req.user.id; // Assuming you have user ID in req.user
-    console.log("User", req.body);
+  
     const note = new Note({
       /*
       con i tre puntini (...) prendo i campi che mi servono dal body della richiesta
@@ -20,8 +20,8 @@ export const createNote = async (req, res) => {
 
 export const getNotes = async (req, res) => {
   try {
-    console.log("User", req.body);
     const userId = req.user.id; // Assuming you have user ID in req.user
+    
     const notes = await Note.find({ user: userId });  // filtra le note per l'utente
     if (!notes) {
       return res.status(404).json({ message: "No notes found" });

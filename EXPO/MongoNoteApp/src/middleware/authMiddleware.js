@@ -18,7 +18,7 @@ export const authenticate = (req, res, next) => {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET); // Verifica il token
     req.user = decoded; // Aggiungi i dati dell'utente alla richiesta
-    console.log('User authenticated:', req.user); // Log dell'utente autenticato
+    
     next();
   } catch (error) {
     res.status(400).json({ message: 'Invalid token.' });
